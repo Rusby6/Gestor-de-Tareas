@@ -37,6 +37,7 @@ class TareaController {
     }
 
     public function eliminarTarea() {
+        // Obtener el ID de la tarea 
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $this->gestor->eliminarTarea($id);
@@ -48,7 +49,6 @@ class TareaController {
 
 
     public function mostrarEditar() {
-        // Paso 1: Obtener el ID de la tarea a editar
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             

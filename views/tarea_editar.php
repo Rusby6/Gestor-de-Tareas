@@ -39,6 +39,6 @@
     </form>
     
     <br>
-    <a href="index.php?action=listarTareas">← Volver a la lista</a>
+    <a href="index.php?action=listarTareas">Volver a la lista</a>
 </body>
 </html>

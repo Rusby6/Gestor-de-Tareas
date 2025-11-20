@@ -17,22 +17,24 @@
                 <th>Descripción</th>
                 <th>Prioridad</th>
                 <th>Fecha Límite</th>
-                <th>Acciones</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
             <?php foreach ($tareas as $id => $tarea): ?>
             <tr>
-                <td><?= htmlspecialchars($tarea->getNombre()) ?></td>
-                <td><?= htmlspecialchars($tarea->getDescripcion()) ?></td>
-                <td><?= htmlspecialchars($tarea->getPrioridad()) ?></td>
-                <td><?= htmlspecialchars($tarea->getFechaLimite()) ?></td>
+                <td><?php echo $tarea->getNombre(); ?></td>
+                <td><?php echo $tarea->getDescripcion(); ?></td>
+                <td><?php echo $tarea->getPrioridad(); ?></td>
+                <td><?php echo $tarea->getFechaLimite(); ?></td>
                 <td>
                     <!-- Botón Editar -->
-                    <form method="POST" action="index.php?action=mostrarEditar&id=<?= $id ?>" style="display: inline;">
+                    <form method="POST" action="index.php?action=mostrarEditar&id=<?php echo $id; ?>">
                         <button type="submit">Editar</button>
                     </form>
-                    
+                </td>
+                <td>
                     <!-- Botón Eliminar -->
-                    <form method="POST" action="index.php?action=eliminarTarea&id=<?= $id ?>" style="display: inline;">
+                    <form method="POST" action="index.php?action=eliminarTarea&id=<?php echo $id; ?>">
                         <button type="submit" onclick="return confirm('¿Eliminar esta tarea?')">Eliminar</button>
                     </form>
                 </td>
@@ -44,10 +46,10 @@
     <br><br>
 
     <form method="POST" action="index.php?action=mostrarFormulario">
-        <button type="submit">Agregar nueva tarea</button>
+        <button type="submit">Añadir nueva tarea</button>
     </form>
     <br>
-    <form method="POST" action="index.php?action=logout" style="display: inline;">
+    <form method="POST" action="index.php?action=logout">
         <button type="submit">Cerrar Sesión</button>
     </form>
 </body>

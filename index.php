@@ -14,13 +14,6 @@ if (isset($_GET['action'])) {
 $loginController = new LoginController();
 $tareaController = new TareaController();
 
-/* // Verificar si necesita login (excepto para login/logout)
-$necesitaLogin = !in_array($action, ['mostrarLogin', 'procesarLogin', 'logout']);
-
-if ($necesitaLogin && !$loginController->isLoggedIn()) {
-    header('Location: index.php?action=mostrarLogin');
-    exit();
-} */
 
 // Ejecutar la acción correspondiente
 switch ($action) {

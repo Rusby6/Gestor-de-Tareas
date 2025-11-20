@@ -16,13 +16,13 @@ class GestorTareas {
     }
 
     public function agregarTarea($tarea) {
-    // Generar un nuevo ID
-    $nuevoId = $this->generarId();
-    
-    $tarea->setId($nuevoId);
+        // Generar un nuevo ID
+        $nuevoId = $this->generarId();
+        
+        $tarea->setId($nuevoId);
 
-    // Guardar la tarea en el array de sesión
-    $_SESSION['tareas'][$nuevoId] = $tarea;
+        // Guardar la tarea en el array de sesión
+        $_SESSION['tareas'][$nuevoId] = $tarea;
     }
     
     public function obtenerTareas() {

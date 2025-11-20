@@ -10,9 +10,9 @@ class Usuario {
 
     public function login($username, $password) {
         if ($username === 'ruslan' && $password === '1234') {
-            // 2. Si son correctas, crear sesión
-            $this->session->set('usuario', $username);
-            $this->session->set('logged_in', true);
+            // crear sesión
+            $this->session->set('usuario', $username); // guarda "ruslan" en sesión
+            $this->session->set('logged_in', true);    // y true
             return true;
         }
         return false;
