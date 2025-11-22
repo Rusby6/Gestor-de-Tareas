@@ -65,11 +65,28 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
+        .mensaje-error {
+            background-color: #fee;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
     <form method="POST" action="?accion=procesarLogin">
         <h2>Iniciar Sesión</h2>
+
+        <?php if (isset($mensajeError)): ?>
+            <div class="mensaje-error">
+                <?php echo $mensajeError; ?>
+            </div>
+        <?php endif; ?>
+
         <label>Usuario:</label>
         <input type="text" name="username" required>
         <br>

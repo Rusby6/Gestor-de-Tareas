@@ -81,7 +81,7 @@
         
         <br><br>
         
-        <label>Descripción:</label>
+        <label>Descripción (opcional):</label>
         <br>
         <textarea name="descripcion"><?php echo $tarea->getDescripcion() ?></textarea>
         

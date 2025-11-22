@@ -21,6 +21,7 @@ class LoginController {
                 header('Location: index.php?accion=listarTareas');
                 exit();
             } else {
+                $mensajeError = "Usuario o contraseña incorrectos";
                 include 'views/login_form.php';
             }
         }

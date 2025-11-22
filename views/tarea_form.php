@@ -89,7 +89,7 @@
     <input type="text" name="nombre" required>
     <br>
     <br>
-    <label>Descripción:</label>
+    <label>Descripción (opcional):</label>
     <br>
     <textarea name="descripcion"></textarea>
     <br>
