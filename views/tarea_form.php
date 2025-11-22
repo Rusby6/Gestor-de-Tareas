@@ -83,7 +83,7 @@
 <body>
     <h1>Agregar Tareas</h1>
 
-    <?php if (isset($fechaError) && $fechaError === 'fechaError'): ?>
+    <?php if (isset($fechaError)): ?>
         <div class="fechaError">Error: Selecciona una fecha</div>
     <?php endif; ?>
 
