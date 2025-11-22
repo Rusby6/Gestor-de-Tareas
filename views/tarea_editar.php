@@ -6,7 +6,7 @@
 <body>
     <h2>Editar Tarea</h2>
     
-    <form method="POST" action="index.php?action=editarTarea">
+    <form method="POST" action="index.php?accion=editarTarea">
         <!-- Campo hidden para el ID -->
         <input type="hidden" name="id" value="<?= $tarea->getId() ?>">
         
@@ -39,6 +39,6 @@
     </form>
     
     <br>
-    <a href="index.php?action=listarTareas">Volver a la lista</a>
+    <a href="index.php?accion=listarTareas">Volver a la lista</a>
 </body>
 </html>

@@ -25,7 +25,7 @@ class TareaController {
             //Guardar la tarea
             $this->gestor->agregarTarea($tarea);
 
-            header('Location: index.php?action=listarTareas');
+            header('Location: index.php?accion=listarTareas');
             exit();            
         }
     }
@@ -42,7 +42,7 @@ class TareaController {
             $id = $_GET['id'];
             $this->gestor->eliminarTarea($id);
             
-            header('Location: index.php?action=listarTareas');
+            header('Location: index.php?accion=listarTareas');
             exit();
         }
     }
@@ -59,7 +59,7 @@ class TareaController {
                 $tarea = $tareas[$id];
                 include 'views/tarea_editar.php';
             } else {
-                header('Location: index.php?action=listarTareas');
+                header('Location: index.php?accion=listarTareas');
                 exit();
             }
         }
@@ -84,7 +84,7 @@ class TareaController {
             
             $this->gestor->actualizarTarea($id, $nuevosDatos);
             
-            header('Location: index.php?action=listarTareas');
+            header('Location: index.php?accion=listarTareas');
             exit();
         } 
     }

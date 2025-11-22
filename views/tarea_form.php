@@ -8,7 +8,7 @@
 <body>
     <h1>Agregar Tareas</h1>
     <br>
-    <form name="formulario" method="POST" action="index.php?action=agregarTarea">
+    <form name="formulario" method="POST" action="index.php?accion=agregarTarea">
     <label>Nombre de la tarea:</label>
     <input type="text" name="nombre" required>
     <br>

@@ -4,10 +4,10 @@ require_once 'controller/LoginController.php';
 require_once 'controller/TareaController.php';
 
 // Qué acción ejecutar
-if (isset($_GET['action'])) {
-    $action = $_GET['action'];
+if (isset($_GET['accion'])) {
+    $accion = $_GET['accion'];
 } else {
-    $action = 'mostrarLogin';
+    $accion = 'mostrarLogin';
 }
 
 // Crear controladores
@@ -16,7 +16,7 @@ $tareaController = new TareaController();
 
 
 // Ejecutar la acción correspondiente
-switch ($action) {
+switch ($accion) {
     case 'mostrarLogin':
         $loginController->mostrarLogin();
         break;

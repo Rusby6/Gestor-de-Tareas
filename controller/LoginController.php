@@ -18,7 +18,7 @@ class LoginController {
             $password = $_POST['password'];
 
             if ($this->usuario->login($username, $password)) {
-                header('Location: index.php?action=listarTareas');
+                header('Location: index.php?accion=listarTareas');
                 exit();
             } else {
                 include 'views/login_form.php';
@@ -28,7 +28,7 @@ class LoginController {
 
     public function logout() {
         $this->usuario->logout();
-        header('Location: index.php?action=mostrarLogin');
+        header('Location: index.php?accion=mostrarLogin');
         exit();
     }
 

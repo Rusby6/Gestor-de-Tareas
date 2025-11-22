@@ -28,13 +28,13 @@
                 <td><?php echo $tarea->getFechaLimite(); ?></td>
                 <td>
                     <!-- Botón Editar -->
-                    <form method="POST" action="index.php?action=mostrarEditar&id=<?php echo $id; ?>">
+                    <form method="POST" action="index.php?accion=mostrarEditar&id=<?php echo $id; ?>">
                         <button type="submit">Editar</button>
                     </form>
                 </td>
                 <td>
                     <!-- Botón Eliminar -->
-                    <form method="POST" action="index.php?action=eliminarTarea&id=<?php echo $id; ?>">
+                    <form method="POST" action="index.php?accion=eliminarTarea&id=<?php echo $id; ?>">
                         <button type="submit" onclick="return confirm('¿Eliminar esta tarea?')">Eliminar</button>
                     </form>
                 </td>
@@ -45,11 +45,11 @@
 
     <br><br>
 
-    <form method="POST" action="index.php?action=mostrarFormulario">
+    <form method="POST" action="index.php?accion=mostrarFormulario">
         <button type="submit">Añadir nueva tarea</button>
     </form>
     <br>
-    <form method="POST" action="index.php?action=logout">
+    <form method="POST" action="index.php?accion=logout">
         <button type="submit">Cerrar Sesión</button>
     </form>
 </body>
