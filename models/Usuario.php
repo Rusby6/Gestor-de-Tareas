@@ -10,24 +10,17 @@ class Usuario {
 
     public function login($username, $password) {
         if ($username === 'ruslan' && $password === '1234') {
-            // crear sesión
-            $this->session->set('usuario', $username); // guarda "ruslan" en sesión
-            $this->session->set('logged_in', true);    // y true
+            $this->session->set('usuario', $username);
             return true;
         }
         return false;
     }
 
     public function isLoggedIn() {
-        $loggedIn = $this->session->get('logged_in');
-        return $loggedIn === true;
+        return $this->session->get('usuario') !== null;
     }
 
     public function logout(){
         $this->session->destroySession();
-    }
-    
-    public function getUsuario(){
-        return $this->session->get('usuario');
     }
 }

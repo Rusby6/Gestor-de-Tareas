@@ -14,6 +14,21 @@ if (isset($_GET['accion'])) {
 $loginController = new LoginController();
 $tareaController = new TareaController();
 
+// Definir rutas que requieren autenticación
+$rutasProtegidas = [
+    'mostrarFormulario', 
+    'agregarTarea', 
+    'listarTareas', 
+    'mostrarEditar', 
+    'editarTarea', 
+    'eliminarTarea'
+];
+
+// Verificar autenticación para rutas protegidas
+if (in_array($accion, $rutasProtegidas) && !$loginController->isLoggedIn()) {
+    header('Location: index.php?accion=mostrarLogin');
+    exit();
+}
 
 // Ejecutar la acción correspondiente
 switch ($accion) {

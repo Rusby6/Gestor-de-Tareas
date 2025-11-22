@@ -9,6 +9,11 @@ class LoginController {
     }
 
     public function mostrarLogin() {
+        // Si ya está logueado, redirigir a tareas
+        if ($this->isLoggedIn()) {
+            header('Location: index.php?accion=listarTareas');
+            exit();
+        }
         include 'views/login_form.php';
     }
 
@@ -36,5 +41,4 @@ class LoginController {
     public function isLoggedIn() {
         return $this->usuario->isLoggedIn();
     }
-
 }
