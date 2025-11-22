@@ -74,6 +74,16 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
+        .fechaError {
+        color: #d32f2f;
+        background-color: #ffebee;
+        border: 1px solid #f44336;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: 600;
+    }
     </style>
 </head>
 <body>
@@ -83,6 +93,11 @@
 </head>
 <body>
     <h1>Agregar Tareas</h1>
+
+    <?php if (isset($fechaError) && $fechaError === 'fechaError'): ?>
+        <div class="fechaError">Error: Selecciona una fecha</div>
+    <?php endif; ?>
+
     <br>
     <form name="formulario" method="POST" action="index.php?accion=agregarTarea">
     <label>Nombre de la tarea:</label>

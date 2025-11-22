@@ -19,6 +19,13 @@ class TareaController {
             $descripcion = $_POST['descripcion'];
             $prioridad = $_POST['prioridad'];
             $fecha_limite = $_POST['fecha_limite']; 
+
+            if (empty($fecha_limite)) {
+                // Mostrar el formulario nuevamente con mensaje de error
+                $fechaError = "fechaError";
+                include 'views/tarea_form.php';
+                return;
+            }
             
             $tarea = new Tarea($nombre, $descripcion, $prioridad, $fecha_limite);
 
@@ -74,6 +81,17 @@ class TareaController {
             $prioridad = $_POST['prioridad'];
             $fecha_limite = $_POST['fecha_limite'];
             
+            if (empty($fecha_limite)) {
+                // Obtener la tarea actual para mostrar el formulario con los datos
+                $tareas = $this->gestor->obtenerTareas();
+                if (isset($tareas[$id])) {
+                    $tarea = $tareas[$id];
+                    $fechaError = "fechaError";
+                    include 'views/tarea_editar.php';
+                    return;
+                }
+            }
+
             // Crear array con nuevos datos
             $nuevosDatos = [
                 'nombre' => $nombre,

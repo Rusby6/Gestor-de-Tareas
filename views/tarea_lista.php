@@ -92,7 +92,7 @@
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Prioridad</th>
-                <th>Fecha Límite</th>
+                <th>Fecha</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
