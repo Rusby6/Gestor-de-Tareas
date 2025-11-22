@@ -2,7 +2,7 @@
 class GestorTareas {
     public function __construct() {
         if (!isset($_SESSION['tareas'])) {  
-            $_SESSION['tareas'] = array();  // Array asociativo
+            $_SESSION['tareas'] = [];  // Array asociativo de session
         }
 
         if (!isset($_SESSION['ultimo_id'])) {
@@ -18,10 +18,9 @@ class GestorTareas {
     public function agregarTarea($tarea) {
         // Generar un nuevo ID
         $nuevoId = $this->generarId();
-        
         $tarea->setId($nuevoId);
 
-        // Guardar la tarea en el array de sesión
+        // Guardar la tarea en el array asociativo de sesión
         $_SESSION['tareas'][$nuevoId] = $tarea;
     }
     
@@ -34,7 +33,7 @@ class GestorTareas {
     }
     
     public function actualizarTarea($id, $nuevosDatos) {
-    //Verificar que la tarea existe
+    //si no existe
     if (!isset($_SESSION['tareas'][$id])) {
     return false;
     }

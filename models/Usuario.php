@@ -9,7 +9,7 @@ class Usuario {
     }
 
     public function login($username, $password) {
-        if ($username === 'ruslan' && $password === '1234') {
+        if ($username === 'rus' && $password === '1234') {
             $this->session->set('usuario', $username);
             return true;
         }
@@ -17,7 +17,11 @@ class Usuario {
     }
 
     public function isLoggedIn() {
-        return $this->session->get('usuario') !== null;
+        if($this->session->get('usuario') !== null){
+            return true;
+        }else{
+            return false;
+        };
     }
 
     public function logout(){

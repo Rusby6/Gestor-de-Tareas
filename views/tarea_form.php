@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Tarea</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -75,21 +69,16 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         .fechaError {
-        color: #d32f2f;
-        background-color: #ffebee;
-        border: 1px solid #f44336;
-        padding: 12px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        text-align: center;
-        font-weight: 600;
-    }
+            color: #d32f2f;
+            background-color: #ffebee;
+            border: 1px solid #f44336;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
     </style>
-</head>
-<body>
-    <!-- El resto del contenido permanece igual -->
-</body>
-</html>
 </head>
 <body>
     <h1>Agregar Tareas</h1>
@@ -98,31 +87,30 @@
         <div class="fechaError">Error: Selecciona una fecha</div>
     <?php endif; ?>
 
-    <br>
     <form name="formulario" method="POST" action="index.php?accion=agregarTarea">
-    <label>Nombre de la tarea:</label>
-    <input type="text" name="nombre" required>
-    <br>
-    <br>
-    <label>Descripción (opcional):</label>
-    <br>
-    <textarea name="descripcion"></textarea>
-    <br>
-    <br>
-    <label>Prioridad:</label>
-    <select name="prioridad">
-        <option value="baja">Baja</option>
-        <option value="media">Media</option>
-        <option value="alta">Alta</option>
-    </select>
-    <br>
-    <br>
-    <label>Fecha límite:</label>
-    <input type="date" name="fecha_limite">
-    <br>
-    <br>
-    <br>
-    <button type="submit">Agregar Tarea</button>
-</form>
+        <label>Nombre de la tarea:</label>
+        <input type="text" name="nombre" required>
+        <br>
+        <br>
+        <label>Descripción (opcional):</label>
+        <br>
+        <textarea name="descripcion"></textarea>
+        <br>
+        <br>
+        <label>Prioridad:</label>
+        <select name="prioridad">
+            <option value="baja">Baja</option>
+            <option value="media">Media</option>
+            <option value="alta">Alta</option>
+        </select>
+        <br>
+        <br>
+        <label>Fecha límite:</label>
+        <input type="date" name="fecha_limite">
+        <br>
+        <br>
+        <br>
+        <button type="submit">Agregar Tarea</button>
+    </form>
 </body>
 </html>

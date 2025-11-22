@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Gestor de Tareas</title>
-    <style>
+        <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             margin: 0;
             padding: 20px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
         }
         h2 {
             text-align: center;
-            color: #333;
+            color: white;
             margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         form {
             background: white;
@@ -78,9 +81,9 @@
     </style>
 </head>
 <body>
+    <h2>Iniciar Sesión</h2>
+<body>
     <form method="POST" action="?accion=procesarLogin">
-        <h2>Iniciar Sesión</h2>
-
         <?php if (isset($mensajeError)): ?>
             <div class="mensaje-error">
                 <?php echo $mensajeError; ?>

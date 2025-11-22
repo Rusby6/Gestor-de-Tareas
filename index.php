@@ -24,8 +24,8 @@ $rutasProtegidas = [
     'eliminarTarea'
 ];
 
-// Verificar autenticación para rutas protegidas
-if (in_array($accion, $rutasProtegidas) && !$loginController->isLoggedIn()) {
+// rutasPriv y no logeado
+if (in_array($accion, $rutasProtegidas) && !$loginController->isLoggedIn()) { 
     header('Location: index.php?accion=mostrarLogin');
     exit();
 }

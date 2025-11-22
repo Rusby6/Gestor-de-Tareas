@@ -38,7 +38,7 @@ class TareaController {
     }
 
     public function listarTareas() {
-        // Obtener tareas usando el gestor
+        // Obtener tareas
         $tareas = $this->gestor->obtenerTareas();
         include 'views/tarea_lista.php';
     }

@@ -82,7 +82,7 @@
 <body>
     <h2>Editar Tarea</h2>
 
-    <?php if (isset($fechaError) && $fechaError === 'fechaError'): ?>
+    <?php if (isset($fechaError)): ?>
         <div class="fechaError">Error: Selecciona una fecha</div>
     <?php endif; ?>
     
