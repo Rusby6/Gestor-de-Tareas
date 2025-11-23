@@ -67,17 +67,20 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-        .fechaError {
-        color: #d32f2f;
-        background-color: #ffebee;
-        border: 1px solid #f44336;
-        padding: 12px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        text-align: center;
-        font-weight: 600;
-    }
-    </style>
+        .fechaError, .nombreError {
+            color: #d32f2f;
+            background-color: #ffebee;
+            border: 1px solid #f44336;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            max-width: 300px;        
+            margin-left: auto;
+            margin-right: auto;
+        }
+        </style>
 </head>
 <body>
     <h2>Editar Tarea</h2>
