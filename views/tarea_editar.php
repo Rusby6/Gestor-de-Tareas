@@ -82,8 +82,16 @@
 <body>
     <h2>Editar Tarea</h2>
 
-    <?php if (isset($fechaError)): ?>
-        <div class="fechaError">Error: Selecciona una fecha</div>
+    <?php if (isset($errores['nombre'])): ?>
+    <div class="nombreError">
+        <p>Introduce un nombre para la tarea</p>
+    </div>
+    <?php endif; ?>
+
+    <?php if (isset($errores['fecha'])): ?>
+        <div class="fechaError">
+            <p>Selecciona una fecha</p>
+        </div>
     <?php endif; ?>
     
     <form method="POST" action="index.php?accion=editarTarea">
@@ -91,7 +99,7 @@
         <input type="hidden" name="id" value="<?php echo $tarea->getId() ?>">
         
         <label>Nombre de la tarea:</label>
-        <input type="text" name="nombre" value="<?php echo $tarea->getNombre() ?>" required>
+        <input type="text" name="nombre" value="<?php echo $tarea->getNombre() ?>">
         
         <br><br>
         

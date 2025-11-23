@@ -78,18 +78,36 @@
             text-align: center;
             font-weight: 600;
         }
+        .nombreError {
+          color: #d32f2f;
+          background-color: #ffebee;
+          border: 1px solid #f44336;
+          padding: 12px;
+          border-radius: 8px;
+          margin-bottom: 20px;
+          text-align: center;
+          font-weight: 600;
+        }
     </style>
 </head>
 <body>
     <h1>Agregar Tareas</h1>
 
-    <?php if (isset($fechaError)): ?>
-        <div class="fechaError">Error: Selecciona una fecha</div>
+     <?php if (isset($errores['nombre'])): ?>
+    <div class="nombreError">
+        <p>Introduce un nombre para la tarea</p>
+    </div>
+    <?php endif; ?>
+        
+    <?php if (isset($errores['fecha'])): ?>
+        <div class="fechaError">
+            <p>Selecciona una fecha</p>
+        </div>
     <?php endif; ?>
 
     <form name="formulario" method="POST" action="index.php?accion=agregarTarea">
         <label>Nombre de la tarea:</label>
-        <input type="text" name="nombre" required>
+        <input type="text" name="nombre">
         <br>
         <br>
         <label>Descripción (opcional):</label>

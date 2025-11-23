@@ -20,9 +20,18 @@ class TareaController {
             $prioridad = $_POST['prioridad'];
             $fecha_limite = $_POST['fecha_limite']; 
 
+            $errores = [];  // Array para acumular errores
+
+            if (empty($nombre)) {
+                $errores['nombre'] = true;
+            }
+
             if (empty($fecha_limite)) {
-                // Mostrar el formulario nuevamente con mensaje de error
-                $fechaError = "fechaError";
+                $errores['fecha'] = true;
+            }
+        
+            // Si hay errores, mostrar formulario con TODOS los mensajes
+            if (!empty($errores)) {
                 include 'views/tarea_form.php';
                 return;
             }
@@ -90,6 +99,21 @@ class TareaController {
                     include 'views/tarea_editar.php';
                     return;
                 }
+            }
+            $errores = [];  // Array para acumular errores
+
+            if (empty($nombre)) {
+                $errores['nombre'] = true;
+            }
+
+            if (empty($fecha_limite)) {
+                $errores['fecha'] = true;
+            }
+        
+            // Si hay errores, mostrar formulario con TODOS los mensajes
+            if (!empty($errores)) {
+                include 'views/tarea_form.php';
+                return;
             }
 
             // Crear array con nuevos datos

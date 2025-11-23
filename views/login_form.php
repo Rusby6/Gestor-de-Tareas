@@ -86,7 +86,7 @@
     <form method="POST" action="?accion=procesarLogin">
         <?php if (isset($mensajeError)): ?>
             <div class="mensaje-error">
-                <?php echo $mensajeError; ?>
+                <p>Usuario o contraseña incorrectos</p>
             </div>
         <?php endif; ?>
 
