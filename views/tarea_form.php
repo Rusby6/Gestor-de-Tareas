@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- NO EVALUAR LA ETIQUETA STYLE -->
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -86,19 +87,20 @@
 <body>
     <h1>Agregar Tareas</h1>
 
-     <?php if (isset($errores['nombre'])): ?>
-    <div class="nombreError">
-        <p>Introduce un nombre para la tarea</p>
-    </div>
-    <?php endif; ?>
-
-    <?php if (isset($errores['fecha'])): ?>
-        <div class="fechaError">
-            <p>Selecciona una fecha</p>
-        </div>
-    <?php endif; ?>
-
     <form name="formulario" method="POST" action="index.php?accion=agregarTarea">
+
+        <?php if (isset($errores['nombre'])): ?>
+        <div class="nombreError">
+            <p>Introduce un nombre para la tarea</p>
+        </div>
+        <?php endif; ?>
+
+        <?php if (isset($errores['fecha'])): ?>
+            <div class="fechaError">
+                <p>Selecciona una fecha</p>
+            </div>
+        <?php endif; ?>
+        
         <label>Nombre de la tarea:</label>
         <input type="text" name="nombre">
         <br>

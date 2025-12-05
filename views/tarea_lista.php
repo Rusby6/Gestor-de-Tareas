@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- NO EVALUAR LA ETIQUETA STYLE -->
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -110,8 +111,10 @@
                 </td>
                 <td>
                     <!-- Botón Eliminar -->
-                    <form method="POST" action="index.php?accion=eliminarTarea&id=<?php echo $id; ?>">
-                        <button type="submit" onclick="return confirm('¿Eliminar esta tarea?')">Eliminar</button>
+
+                    <form method="POST" action="index.php?accion=eliminarTarea">
+                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                        <button type="submit" onclick="return confirm('¿Eliminar?')">Eliminar</button>
                     </form>
                 </td>
             </tr>

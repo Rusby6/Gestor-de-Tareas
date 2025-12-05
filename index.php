@@ -3,7 +3,7 @@ require_once 'session.php';
 require_once 'controller/LoginController.php';
 require_once 'controller/TareaController.php';
 
-// Qué acción ejecutar
+// accion a ejecutar
 if (isset($_GET['accion'])) {
     $accion = $_GET['accion'];
 } else {
@@ -14,7 +14,7 @@ if (isset($_GET['accion'])) {
 $loginController = new LoginController();
 $tareaController = new TareaController();
 
-// Definir rutas que requieren autenticación
+// rutas que requieren autenticación
 $rutasProtegidas = [
     'mostrarFormulario', 
     'agregarTarea', 
@@ -30,7 +30,7 @@ if (in_array($accion, $rutasProtegidas) && !$loginController->isLoggedIn()) {
     exit();
 }
 
-// Ejecutar la acción correspondiente
+// Ejecutar la accion que toca
 switch ($accion) {
     case 'mostrarLogin':
         $loginController->mostrarLogin();

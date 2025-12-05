@@ -37,7 +37,7 @@ class TareaController {
             }
             
             $tarea = new Tarea($nombre, $descripcion, $prioridad, $fecha_limite);
-
+            
             //Guardar la tarea
             $this->gestor->agregarTarea($tarea);
 
@@ -47,15 +47,14 @@ class TareaController {
     }
 
     public function listarTareas() {
-        // Obtener tareas
         $tareas = $this->gestor->obtenerTareas();
         include 'views/tarea_lista.php';
     }
 
     public function eliminarTarea() {
         // Obtener el ID de la tarea 
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
             $this->gestor->eliminarTarea($id);
             
             header('Location: index.php?accion=listarTareas');
@@ -90,16 +89,6 @@ class TareaController {
             $prioridad = $_POST['prioridad'];
             $fecha_limite = $_POST['fecha_limite'];
             
-            if (empty($fecha_limite)) {
-                // Obtener la tarea actual para mostrar el formulario con los datos
-                $tareas = $this->gestor->obtenerTareas();
-                if (isset($tareas[$id])) {
-                    $tarea = $tareas[$id];
-                    $fechaError = "fechaError";
-                    include 'views/tarea_editar.php';
-                    return;
-                }
-            }
             $errores = [];  // Array para acumular errores
 
             if (empty($nombre)) {
@@ -111,12 +100,13 @@ class TareaController {
             }
         
             // Si hay errores, mostrar formulario con TODOS los mensajes
-            if (!empty($errores)) {
-                include 'views/tarea_form.php';
+             if (!empty($errores)) {
+                $tareas = $this->gestor->obtenerTareas();
+                $tarea = $tareas[$id];
+                include 'views/tarea_editar.php';
                 return;
             }
 
-            // Crear array con nuevos datos
             $nuevosDatos = [
                 'nombre' => $nombre,
                 'descripcion' => $descripcion,

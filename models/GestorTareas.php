@@ -1,18 +1,24 @@
 <?php
 class GestorTareas {
+    private $session;
+    
     public function __construct() {
-        if (!isset($_SESSION['tareas'])) {  
-            $_SESSION['tareas'] = [];  // Array asociativo de session
+        $this->session = new Session();
+        
+        if (!$this->session->get('tareas')) {  
+            $this->session->set('tareas', []);  // Array asociativo de session
         }
 
-        if (!isset($_SESSION['ultimo_id'])) {
-            $_SESSION['ultimo_id'] = 0;  // Contador de ultimos IDs
+        if (!$this->session->get('ultimo_id')) {
+            $this->session->set('ultimo_id', 0);  // Contador de ultimos IDs
         }
     }
     
     private function generarId() {
-        $_SESSION['ultimo_id']++;
-        return $_SESSION['ultimo_id'];
+        $ultimoId = $this->session->get('ultimo_id');
+        $nuevoId = $ultimoId + 1;
+        $this->session->set('ultimo_id', $nuevoId);
+        return $nuevoId;
     }
 
     public function agregarTarea($tarea) {
@@ -20,45 +26,59 @@ class GestorTareas {
         $nuevoId = $this->generarId();
         $tarea->setId($nuevoId);
 
-        // Guardar la tarea en el array asociativo de sesión
-        $_SESSION['tareas'][$nuevoId] = $tarea;
+        // Obtener el array actual de tareas
+        $tareas = $this->session->get('tareas');
+        
+        // Agregar la nueva tarea
+        $tareas[$nuevoId] = $tarea;
+        
+        // Guardar el array actualizado en la sesión
+        $this->session->set('tareas', $tareas);
     }
     
     public function obtenerTareas() {
-        return $_SESSION['tareas'];
+        return $this->session->get('tareas');
     }
     
     public function eliminarTarea($id) {
-        unset($_SESSION['tareas'][$id]);
+        $tareas = $this->session->get('tareas');
+        unset($tareas[$id]);
+        $this->session->set('tareas', $tareas);
     }
     
     public function actualizarTarea($id, $nuevosDatos) {
-    //si no existe
-    if (!isset($_SESSION['tareas'][$id])) {
-    return false;
-    }
-    //Recuperar la tarea actual
-    $tarea = $_SESSION['tareas'][$id];
-
-    // Actualizar propiedades
-    if (isset($nuevosDatos['nombre'])) {
-        $tarea->setNombre($nuevosDatos['nombre']);
-    }
+        // Obtener el array de tareas
+        $tareas = $this->session->get('tareas');
         
-    if (isset($nuevosDatos['descripcion'])) {
-        $tarea->setDescripcion($nuevosDatos['descripcion']);
-    }
+        // Verificar si existe
+        if (!isset($tareas[$id])) {
+            return false;
+        }
         
-    if (isset($nuevosDatos['prioridad'])) {
-        $tarea->setPrioridad($nuevosDatos['prioridad']);
-    }
-        
-    if (isset($nuevosDatos['fechaLimite'])) {
-        $tarea->setFechaLimite($nuevosDatos['fechaLimite']);
-    }
+        // Recuperar la tarea actual
+        $tarea = $tareas[$id];
 
-    return true;
+        // Actualizar propiedades
+        if (isset($nuevosDatos['nombre'])) {
+            $tarea->setNombre($nuevosDatos['nombre']);
+        }
+            
+        if (isset($nuevosDatos['descripcion'])) {
+            $tarea->setDescripcion($nuevosDatos['descripcion']);
+        }
+            
+        if (isset($nuevosDatos['prioridad'])) {
+            $tarea->setPrioridad($nuevosDatos['prioridad']);
+        }
+            
+        if (isset($nuevosDatos['fechaLimite'])) {
+            $tarea->setFechaLimite($nuevosDatos['fechaLimite']);
+        }
 
+        // Guardar la tarea actualizada
+        $tareas[$id] = $tarea;
+        $this->session->set('tareas', $tareas);
+
+        return true;
     }
-}   
-
+}

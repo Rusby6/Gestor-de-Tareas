@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Editar Tarea</title>
+    <!-- NO EVALUAR LA ETIQUETA STYLE -->
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -84,20 +85,21 @@
 </head>
 <body>
     <h2>Editar Tarea</h2>
-
-    <?php if (isset($errores['nombre'])): ?>
-    <div class="nombreError">
-        <p>Introduce un nombre para la tarea</p>
-    </div>
-    <?php endif; ?>
-
-    <?php if (isset($errores['fecha'])): ?>
-        <div class="fechaError">
-            <p>Selecciona una fecha</p>
-        </div>
-    <?php endif; ?>
     
     <form method="POST" action="index.php?accion=editarTarea">
+
+        <?php if (isset($errores['nombre'])): ?>
+        <div class="nombreError">
+            <p>Introduce un nombre para la tarea</p>
+        </div>
+        <?php endif; ?>
+
+        <?php if (isset($errores['fecha'])): ?>
+            <div class="fechaError">
+                <p>Selecciona una fecha</p>
+            </div>
+        <?php endif; ?>
+        
         <!-- Campo hidden para el ID -->
         <input type="hidden" name="id" value="<?php echo $tarea->getId() ?>">
         
