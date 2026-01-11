@@ -59,6 +59,12 @@ switch ($accion) {
     case 'eliminarTarea':
         $tareaController->eliminarTarea();
         break;
+    case 'mostrarRegistro':  
+        $loginController->mostrarRegistro();
+        break;
+    case 'procesarRegistro':  
+        $loginController->procesarRegistro();
+        break;
     default:
         echo "Página no encontrada";
         break;

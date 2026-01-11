@@ -5,14 +5,16 @@ class Tarea {
     private $descripcion;
     private $prioridad;
     private $fechaLimite;
+    private $usuario_id;
     
-    public function __construct($nombre, $descripcion, $prioridad, $fechaLimite, $id = null) {
-    $this->id = $id;  // Puede ser null
-    $this->nombre = $nombre;
-    $this->descripcion = $descripcion;
-    $this->prioridad = $prioridad;
-    $this->fechaLimite = $fechaLimite;
-}
+    public function __construct($nombre, $descripcion, $prioridad, $fechaLimite, $id = null, $usuario_id = null) {
+        $this->id = $id;
+        $this->nombre = $nombre;
+        $this->descripcion = $descripcion;
+        $this->prioridad = $prioridad;
+        $this->fechaLimite = $fechaLimite;
+        $this->usuario_id = $usuario_id;  
+    }
     
     //Getters
     public function getId() { 
@@ -32,6 +34,10 @@ class Tarea {
 
     public function getFechaLimite() { 
         return $this->fechaLimite; 
+    }
+
+    public function getUsuarioId() { 
+        return $this->usuario_id; 
     }
     
     // Setters
@@ -53,5 +59,9 @@ class Tarea {
     
     public function setFechaLimite($fechaLimite) { 
         $this->fechaLimite = $fechaLimite; 
+    }
+
+    public function setUsuarioId($usuario_id) { 
+        $this->usuario_id = $usuario_id; 
     }
 }

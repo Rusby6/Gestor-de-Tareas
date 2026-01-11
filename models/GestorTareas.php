@@ -1,84 +1,136 @@
 <?php
+require_once 'config/dataBase.php';
+
 class GestorTareas {
-    private $session;
+    private $db;
+    private $usuario_id;
     
     public function __construct() {
-        $this->session = new Session();
+        $this->db = new Database();
         
-        if (!$this->session->get('tareas')) {  
-            $this->session->set('tareas', []);  // Array asociativo de session
-        }
-
-        if (!$this->session->get('ultimo_id')) {
-            $this->session->set('ultimo_id', 0);  // Contador de ultimos IDs
-        }
+        if (isset($_SESSION['usuario_id'])) {
+            $this->usuario_id = $_SESSION['usuario_id'];
+        } else {
+            $this->usuario_id = null;
+        }    
     }
     
-    private function generarId() {
-        $ultimoId = $this->session->get('ultimo_id');
-        $nuevoId = $ultimoId + 1;
-        $this->session->set('ultimo_id', $nuevoId);
-        return $nuevoId;
-    }
-
     public function agregarTarea($tarea) {
-        // Generar un nuevo ID
-        $nuevoId = $this->generarId();
-        $tarea->setId($nuevoId);
-
-        // Obtener el array actual de tareas
-        $tareas = $this->session->get('tareas');
+        $conn = $this->db->getConnection();
         
-        // Agregar la nueva tarea
-        $tareas[$nuevoId] = $tarea;
+        $sql = "INSERT INTO tareas (nombre, descripcion, prioridad, fecha_limite, usuario_id) 
+                VALUES (:nombre, :descripcion, :prioridad, :fecha_limite, :usuario_id)";
         
-        // Guardar el array actualizado en la sesión
-        $this->session->set('tareas', $tareas);
+        $stmt = $conn->prepare($sql);
+        
+        return $stmt->execute([
+            ':nombre' => $tarea->getNombre(),
+            ':descripcion' => $tarea->getDescripcion(),
+            ':prioridad' => $tarea->getPrioridad(),
+            ':fecha_limite' => $tarea->getFechaLimite(),
+            ':usuario_id' => $this->usuario_id
+        ]);
     }
     
     public function obtenerTareas() {
-        return $this->session->get('tareas');
+        if (!$this->usuario_id) {
+            return [];
+        }
+        
+        $conn = $this->db->getConnection();
+        
+        $sql = "SELECT * FROM tareas WHERE usuario_id = :usuario_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([':usuario_id' => $this->usuario_id]);
+        
+        $tareasData = $stmt->fetchAll();
+        
+        // Convertir a objetos Tarea
+        $tareas = [];
+        foreach ($tareasData as $tareaData) {
+            $tarea = new Tarea(
+                $tareaData['nombre'],
+                $tareaData['descripcion'],
+                $tareaData['prioridad'],
+                $tareaData['fecha_limite'],
+                $tareaData['id'],
+                $tareaData['usuario_id']
+            );
+            $tareas[$tareaData['id']] = $tarea;
+        }
+        
+        return $tareas;
     }
     
     public function eliminarTarea($id) {
-        $tareas = $this->session->get('tareas');
-        unset($tareas[$id]);
-        $this->session->set('tareas', $tareas);
-    }
-    
-    public function actualizarTarea($id, $nuevosDatos) {
-        // Obtener el array de tareas
-        $tareas = $this->session->get('tareas');
-        
-        // Verificar si existe
-        if (!isset($tareas[$id])) {
+        if (!$this->usuario_id) {
             return false;
         }
         
-        // Recuperar la tarea actual
-        $tarea = $tareas[$id];
-
-        // Actualizar propiedades
-        if (isset($nuevosDatos['nombre'])) {
-            $tarea->setNombre($nuevosDatos['nombre']);
+        $conn = $this->db->getConnection();
+        
+        $sql = "DELETE FROM tareas WHERE id = :id AND usuario_id = :usuario_id";
+        $stmt = $conn->prepare($sql);
+        
+        return $stmt->execute([
+            ':id' => $id,
+            ':usuario_id' => $this->usuario_id
+        ]);
+    }
+    
+    public function actualizarTarea($id, $nuevosDatos) {
+        if (!$this->usuario_id) {
+            return false;
         }
-            
-        if (isset($nuevosDatos['descripcion'])) {
-            $tarea->setDescripcion($nuevosDatos['descripcion']);
+        
+        $conn = $this->db->getConnection();
+        
+        $sql = "UPDATE tareas SET 
+                nombre = :nombre, 
+                descripcion = :descripcion, 
+                prioridad = :prioridad, 
+                fecha_limite = :fecha_limite 
+                WHERE id = :id AND usuario_id = :usuario_id";
+        
+        $stmt = $conn->prepare($sql);
+        
+        return $stmt->execute([
+            ':nombre' => $nuevosDatos['nombre'],
+            ':descripcion' => $nuevosDatos['descripcion'],
+            ':prioridad' => $nuevosDatos['prioridad'],
+            ':fecha_limite' => $nuevosDatos['fechaLimite'],
+            ':id' => $id,
+            ':usuario_id' => $this->usuario_id
+        ]);
+    }
+    
+    public function obtenerTareaPorId($id) {
+        if (!$this->usuario_id) {
+            return null;
         }
-            
-        if (isset($nuevosDatos['prioridad'])) {
-            $tarea->setPrioridad($nuevosDatos['prioridad']);
+        
+        $conn = $this->db->getConnection();
+        
+        $sql = "SELECT * FROM tareas WHERE id = :id AND usuario_id = :usuario_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            ':id' => $id,
+            ':usuario_id' => $this->usuario_id
+        ]);
+        
+        $tareaData = $stmt->fetch();
+        
+        if ($tareaData) {
+            return new Tarea(
+                $tareaData['nombre'],
+                $tareaData['descripcion'],
+                $tareaData['prioridad'],
+                $tareaData['fecha_limite'],
+                $tareaData['id'],
+                $tareaData['usuario_id']
+            );
         }
-            
-        if (isset($nuevosDatos['fechaLimite'])) {
-            $tarea->setFechaLimite($nuevosDatos['fechaLimite']);
-        }
-
-        // Guardar la tarea actualizada
-        $tareas[$id] = $tarea;
-        $this->session->set('tareas', $tareas);
-
-        return true;
+        
+        return null;
     }
 }

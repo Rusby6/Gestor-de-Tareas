@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Gestor de Tareas</title>
-    <!-- NO EVALUAR LA ETIQUETA STYLE -->
+    <title>Registro - Gestor de Tareas</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -79,21 +78,38 @@
             text-align: center;
             font-weight: 500;
         }
+        .mensaje-exito {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+        a {
+            text-align: center;
+            display: block;
+            color: #4361ee;
+            text-decoration: none;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
-    <h2>Iniciar Sesión</h2>
-    <?php if (isset($_SESSION['mensaje_exito'])): ?>
-    <div class="mensaje-exito" style="background-color: #d4edda; color: #155724; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
-        <p><?php echo $_SESSION['mensaje_exito']; ?></p>
-    </div>
-    <?php unset($_SESSION['mensaje_exito']); // Eliminar mensaje después de mostrarlo ?>
-    <?php endif; ?>
-    <form method="POST" action="?accion=procesarLogin">
+    <h2>Registro de Usuario</h2>
+    <form method="POST" action="index.php?accion=procesarRegistro">
         <?php if (isset($mensajeError)): ?>
-        <div class="mensaje-error">
-            <p><?php echo $mensajeError; ?></p> 
-        </div>
+            <div class="mensaje-error">
+                <p><?php echo $mensajeError; ?></p>
+            </div>
+        <?php endif; ?>
+        
+        <?php if (isset($mensajeExito)): ?>
+            <div class="mensaje-exito">
+                <p><?php echo $mensajeExito; ?></p>
+            </div>
         <?php endif; ?>
 
         <label>Usuario:</label>
@@ -102,12 +118,9 @@
         <label>Contraseña:</label>
         <input type="password" name="password" required>
         <br>
-        <button type="submit">Entrar</button>
-
+        <button type="submit">Registrarse</button>
         <br><br>
-        <a href="index.php?accion=mostrarRegistro" style="text-align: center; display: block; color: #4361ee; text-decoration: none;">
-            ¿No tienes cuenta? Regístrate aquí
-        </a>
+        <a href="index.php?accion=mostrarLogin">¿Ya tienes cuenta? Inicia sesión</a>
     </form>
 </body>
 </html>
